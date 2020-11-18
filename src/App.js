@@ -27,14 +27,6 @@ class App extends React.Component {
     Headers = {
       "Content-Type": "application/json"
     };
-    Response = await data.json();
-    Count = Response.count;
-    this.loadingHandler(false);
-    this.setState({
-      num: this.state.num + 1,
-      results: Response.results,
-      count: Count
-    });
     let unique = true;
     previousQueries.forEach((query) => {
       let values = Object.values(query);
@@ -47,6 +39,14 @@ class App extends React.Component {
       let JSONpreviousQueries = JSON.stringify(previousQueries);
       localStorage.setItem("previousQueries", JSONpreviousQueries);
     }
+    Response = await data.json();
+    Count = Response.count;
+    this.loadingHandler(false);
+    this.setState({
+      num: this.state.num + 1,
+      results: Response.results,
+      count: Count
+    });
     console.log(previousQueries);
   };
   loadingHandler = (status) => {

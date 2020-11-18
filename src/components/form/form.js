@@ -29,7 +29,7 @@ function Form(props) {
       }).then((rawdata) => {
         // console.log(rawdata.headers.get("content-type"));
         // return rawdata.json();
-        props.handler(rawdata);
+        props.handler(rawdata, method);
       });
     }
   };
