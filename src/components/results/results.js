@@ -14,14 +14,21 @@ class Results extends React.Component {
             <img src={gif} alt="loading..." className="gif" />
           </Then>
           <Else>
-            <If condition={this.props.count}>
+            <If condition={this.props.errorState}>
               <Then>
-                <h3 title="count">Count: {this.props.count}</h3>
-                <ReactJson name="Headers" src={this.props.headers} />
-                <ReactJson name="Response" src={this.props.response} />
+                <h3> Error happened, fetch not successfull</h3>
               </Then>
               <Else>
-                <h2>No Results</h2>
+                <If condition={this.props.count}>
+                  <Then>
+                    <h3 title="count">Count: {this.props.count}</h3>
+                    <ReactJson name="Headers" src={this.props.headers} />
+                    <ReactJson name="Response" src={this.props.response} />
+                  </Then>
+                  <Else>
+                    <h2>No Results</h2>
+                  </Else>
+                </If>
               </Else>
             </If>
           </Else>

@@ -8,36 +8,50 @@ function Form(props) {
     props.loadingHandler(true);
     const method = document.querySelector('input[name="method"]:checked').value;
     const url = document.querySelector('input[name="url"]').value;
+    const body = document.querySelector('input[name="body"]').value;
     if (method === "GET") {
       fetch(url, {
         method: method,
         headers: {
           "Content-Type": "application/json"
         }
-      }).then((rawdata) => {
-        // console.log(rawdata.headers.get("content-type"));
-        // return rawdata.json();
-        props.handler(rawdata, method);
-      });
+      })
+        .then((rawdata) => {
+          // console.log(rawdata.headers.get("content-type"));
+          // return rawdata.json();
+          props.handler(rawdata, method);
+        })
+        .catch((error) => {
+          console.log("caught");
+          props.handler(error);
+        });
     } else {
+      console.log(JSON.stringify(body));
       fetch(url, {
         method: method,
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(body)
-      }).then((rawdata) => {
-        // console.log(rawdata.headers.get("content-type"));
-        // return rawdata.json();
-        props.handler(rawdata, method);
-      });
+      })
+        .then((rawdata) => {
+          // console.log(rawdata.headers.get("content-type"));
+          // return rawdata.json();
+          props.handler(rawdata, method);
+        })
+        .catch((error) => {
+          console.log("caught");
+          props.handler(error);
+        });
     }
   };
   return (
     <>
       <form>
         <label> URL: </label>
-        <input name="url" type="text" />
+        <input name="url" type="text" required />
+        <label> Body: </label>
+        <input name="body" type="text" />
         <button id="button" onClick={handleClick}>
           GO!
         </button>

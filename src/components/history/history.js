@@ -1,9 +1,10 @@
 import React from "react";
 import QueryItem from "./query-item";
+import "./history-styles.scss";
 const History = (props) => (
   <>
-    <h2>History of previous queries</h2>
-    <ul>
+    <ul className="history">
+      <h2>History of previous queries</h2>
       {props.previousQueries.map((query) => {
         return (
           <QueryItem
